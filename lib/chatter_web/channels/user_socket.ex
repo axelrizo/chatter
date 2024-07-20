@@ -1,6 +1,8 @@
 defmodule ChatterWeb.UserSocket do
   use Phoenix.Socket
 
+  channel "chat_room:*", ChatterWeb.ChatRoomChannel
+
   ## Channels
   # channel "room:*", ChatterWeb.RoomChannel
 
