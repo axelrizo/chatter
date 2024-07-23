@@ -16,7 +16,7 @@ config :chatter, Chatter.Repo,
 # watchers to your application. For example, we use it
 # with webpack to recompile .js and .css sources.
 config :chatter, ChatterWeb.Endpoint,
-  http: [port: 4000],
+  http: [port: 4010],
   debug_errors: true,
   code_reloader: true,
   check_origin: false,
