@@ -2,7 +2,7 @@ defmodule ChatterWeb.Features.UserCreatesNewChatRoomTest do
   use ChatterWeb.FeatureCase, async: true
 
   test "user creates a new chat room successfully", %{session: session} do
-    user = build(:user) |> set_password("superpass") |> insert()
+    user = insert(:user)
 
     session
     |> visit("/")
@@ -10,13 +10,6 @@ defmodule ChatterWeb.Features.UserCreatesNewChatRoomTest do
     |> click(new_chat_link())
     |> create_chat_room(name: "elixir")
     |> assert_has(room_title("elixir"))
-  end
-
-  defp sign_in(session, as: user) do
-    session
-    |> fill_in(Query.text_field("Email"), with: user.email)
-    |> fill_in(Query.text_field("Password"), with: user.password)
-    |> click(Query.button("Sign in"))
   end
 
   defp new_chat_link, do: Query.link("New chat room")

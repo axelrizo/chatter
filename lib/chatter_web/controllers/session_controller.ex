@@ -6,10 +6,16 @@ defmodule ChatterWeb.SessionController do
   end
 
   def create(conn, %{"email" => email, "password" => password}) do
-    user = Doorman.authenticate(email, password)
+    case Doorman.authenticate(email, password) do
+      nil ->
+        conn
+        |> put_flash(:error, "Invalid email or password")
+        |> render("new.html")
 
-    conn
-    |> Doorman.Login.Session.login(user)
-    |> redirect(to: "/")
+      user ->
+        conn
+        |> Doorman.Login.Session.login(user)
+        |> redirect(to: "/")
+    end
   end
 end
